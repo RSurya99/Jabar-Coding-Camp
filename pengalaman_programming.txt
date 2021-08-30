@@ -1,0 +1,10 @@
+Pengalaman programming rafli surya pratama
+awal pertama saya mengoding adalah ketika kelas 1 smp, saat itu saya diberikan sebuah tugas untuk membuat blog di blogger.com, saat itu saya membuat sebuah blog dengan domain raflisuryapratama.blogspot.com menggunakan tema technology dan mengunakan beberapa widget html.
+Namun dikarenakan keterbatasan perangkat saya saat itu masih mengerjakannya di internet cafe. Kemudian setelah beberapa tahun saya tidak ngoding, saya memutuskan untuk ngoding kembali di kelas 11 SMK ketika saya sudah mendapatkan sebuah laptop.
+Saat pertama kembali mengoding saya mulai dengan belajar dasar fundamental melalui bahasa C++. Di bahasa ini saya belajar banyak state dasar dan beberapa function seperti penggunaan IF ELSE, Switch Case, For loop, While loop, dll.
+Namun pada saat itu saya belum memahami keseruan belajar programming jadi saya tidak melanjutkannya.
+Pada tahun 2020 saya naik ke kelas 12 dan terjadi pandemi covid-19, nah saat pandemi ini saya mulai kembali belajar programming dengan giat hingga sekarang saya sudah banyak menguasai bahasa pemrograman dan framework.
+Berikut ini adalah beberapa bahasa dan framework yang sudah saya kuasai diantaranya: HTML, CSS, JS, Python, SASS, Tailwind, Bootstrap, JQuery, Laravel, Flask, Django, dll
+Beberapa project saya tersimpan di github ini, namun kebanyakan saya private.
+Untuk pengalaman bekerja, saat ini saya belum pernah mengikuti project manapun yang sifatnya dibayar, namun jika ada yang berkenan menawarkan project kepada saya dan saya memenuhi persyaratan tersebut boleh kontak saya di telegram atau email :)
+Sekian pengalaman programming saya, mohon maaf bila ada kekurangan.
