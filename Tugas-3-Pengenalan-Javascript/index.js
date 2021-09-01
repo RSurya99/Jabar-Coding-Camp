@@ -8,7 +8,7 @@ var kedua = "belajar javascript itu keren";
 var getFirstCombine = pertama.replace('sangat ', '').split(' ').slice(0,2).join(' ');
 var getSecondCombine = kedua.split(' ').slice(0,2);
 var combined = getFirstCombine.concat(' ', getSecondCombine[0], ' ', getSecondCombine[1].toUpperCase());
-console.log(`JAWABAN SOAL NO.1: \n ${combined} \n`);
+console.log('JAWABAN SOAL NO.1: \n '+ combined + '\n');
 
 
 // soal no 2
@@ -23,7 +23,7 @@ var kataKeempat = "6";
 
 // jawaban  soal no.2
 var result = Number(kataPertama) + Number(kataKedua) * Number(kataKetiga) + Number(kataKeempat);
-console.log(`JAWABAN SOAL NO.2: \n ${result} \n`);
+console.log('JAWABAN SOAL NO.2: \n' + result + '\n');
 
 
 // soal no 3
@@ -47,4 +47,4 @@ kataKedua = splittedKalimat[1]; // Kata Kedua: javascript
 kataKetiga = splittedKalimat[2]; // Kata Ketiga: itu
 kataKeempat = splittedKalimat[3]; // Kata Keempat: keren
 kataKelima = splittedKalimat[4]; // Kata Kelima: sekali
-console.log(`JAWABAN SOAL NO.3: \n kataPertama: ${kataPertama} \n kataKedua: ${kataKedua} \n kataKetiga: ${kataKetiga} \n kataKeempat: ${kataKeempat} \n kataKelima: ${kataKelima}`);
+console.log('JAWABAN SOAL NO.3: \n kataPertama: ' + kataPertama + '\n kataKedua: ' + kataKedua + '\n kataKetiga: ' + kataKetiga + '\n kataKeempat: ' + kataKeempat + '\n kataKelima: ' + kataKelima);
