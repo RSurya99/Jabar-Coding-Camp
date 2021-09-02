@@ -119,9 +119,10 @@ console.log('JAWABAN SOAL NO 3 : \n' + result + '\n');
 // ===
 
 // Jawaban soal no 4
-var m = 4;
+var m = 9;
 var e = 1;
 var result4 = '';
+var divider = '';
 
 for(var i=1; i <= m; i++){
     if(e > 3){
@@ -136,10 +137,11 @@ for(var i=1; i <= m; i++){
             result4 += i + ' - I love Javascript \n';
             break;
         case 3:
-            result4 += i + ' - I love VueJS \n === \n';
+            divider += '===';
+            result4 += i + ' - I love VueJS \n ' + divider + '\n';
             break;
     }
-    
+
     e++;
 }
 
