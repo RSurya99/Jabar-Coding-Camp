@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" placeholder="Masukkan Nama" v-model="newData">
+        <button @click="submit" v-if="editClick">Add</button>
+        <button @click="updateData" v-else>Update</button>
+        <ul>
+            <li v-for="(user, index) in users">{{ user.name }} <button @click="editData(user.name, index)">Edit</button> | <button @click="deleteData(index)">Delete</button></li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                users: [
+                    {
+                        'name': 'Muhammad Iqbal Mubarok',
+                    },
+                    {
+                        'name': 'Ruby Purwanti',
+                    },
+                    {
+                        'name': 'Faqih Muhammad',
+                    }
+                ],
+                newData: '',
+                indexData: 0,
+                editClick: true
+            },
+            methods: {
+                submit: function(e){
+                    this.newData = {
+                        name: this.newData
+                    }
+                    this.users.push(this.newData) // pakai unshift jika ingin menambahkan elemen di awal array
+                    this.newData = ''
+                },
+                editData: function(userName, index){
+                    this.newData = userName
+                    this.indexData = index
+                    this.editClick = !this.editClick
+                },
+                deleteData: function(index){
+                    this.users.splice(index,1)
+                },
+                updateData: function(){
+                    this.users[this.indexData].name = this.newData
+                    this.newData = ''
+                    this.editClick = !this.editClick
+                }
+            }
+        })
+    </script>
+</body>
+</html>
