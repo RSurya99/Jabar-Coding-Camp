@@ -50,7 +50,11 @@
                     this.editClick = !this.editClick
                 },
                 deleteData: function(index){
-                    this.users.splice(index,1)
+                    if (confirm('Apakah anda yakin ingin menghapus data?')) {
+                        this.users.splice(index,1)
+                    } else {
+                        return
+                    }
                 },
                 updateData: function(){
                     this.users[this.indexData].name = this.newData
