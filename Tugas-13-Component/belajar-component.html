@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3>Selected member : {{ selectMember }}</h3>
+        <members-component v-for="member in members" :key="member.name" :member="member" @selected="selectMember = $event">
+            <template v-slot:title>
+                <h4>ini member</h4>
+            </template>
+            <p>ini contoh deskripsi</p>
+        </members-component>
+    </div>
+
+    <!-- <template id="halo-dunia">
+        <h1>{{ message }}</h1>
+    </template> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        // Pendefinian secara lokal
+        var MembersComponent = {
+            template: `
+                <div>
+                    <slot name="title">member</slot>
+                    <p>
+                        <b>name : </b> {{ member.name }} <button @click="$emit('selected', member.name)">pilih</button> <br>
+                        <b>address : </b> {{ member.address }} <br>
+                        <b>no_hp : </b> {{ member.no_hp }}
+                        <slot></slot>
+                    </p>
+                </div>
+            `,
+            data: function(){
+                return {
+                    message: 'Ini adalah component a'
+                }
+            },
+            props: ['member']
+        }
+
+        // Pendefinisian secara global
+        // Vue.component('members-component', {
+        //     template: '#halo-dunia',
+        //     data: function(){
+        //         return {
+        //             message: 'Ini adalah component members'
+        //         }
+        //     }
+        // })
+
+        const vm = new Vue({
+            el: '#app',
+            components: {
+                'members-component': MembersComponent
+            },
+            data: {
+                members: [
+                    {
+                        name: 'Rafli Surya',
+                        address: 'Jl Karting',
+                        no_hp: '085156894623'
+                    },
+                    {
+                        name: 'Adam',
+                        address: 'Jl Cimenyan',
+                        no_hp: '082542421418'
+                    },
+                    {
+                        name: 'Simon',
+                        address: 'Jl Balubur',
+                        no_hp: '08454789247'
+                    },
+                ],
+                selectMember: ''
+            }
+        })
+    </script>
+</body>
+</html>
