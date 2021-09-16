@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Vue Router</h1>
+
+        <!-- Pengganti tag <a href=""></a>  -->
+        <router-link to="/">Home</router-link>
+        <router-link to="/halaman1">halaman1</router-link>
+        <router-link to="/halaman2">halaman2</router-link>
+        <router-link to="/halaman3">halaman3</router-link>
+
+        <!-- Untuk Menampilkan component secara dinamis , sesuai dengan route yang diakses -->
+        <router-view></router-view>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.2/dist/vue-router.js"></script>
+    <script>
+        const Home = { template: '<div>Halaman Home</div>' }
+        const Halaman1 = { template: '<div>Halaman 1</div>' }
+        const Halaman2 = { template: '<div>Halaman 2</div>' }
+        const Halaman3 = { template: '<div>Halaman 3</div>' }
+
+        // arahkan tiap route ke component yang diinginkan
+        const routes = [
+            { path: '/',  component: Home},
+            { path: '/halaman1', component: Halaman1 },
+            { path: '/halaman2', component: Halaman2,  meta: { login: true } },
+            { path: '/halaman3', component: Halaman3,  meta: { login: true, isAdmin: true } },
+            { path: '*', redirect: '/' }
+        ]
+
+        // instansiasi object Vue Router
+        const router = new VueRouter({routes})
+
+        // buat navigation guard/validasi
+        router.beforeEach((to, from, next) => {
+            if(to.matched.some(record => record.meta.login)){
+                // auth = false untuk kasus jika user belum login, auth = true jika kasus user sudah login
+                let auth = false
+                if(!auth){
+                    alert('Silahkan login terlebih dahulu')
+                    next(false)
+                }else{
+                    if(to.matched.some(record => record.meta.isAdmin)){
+                        // roleAdmin = false untuk kasus jika user bukan admin, roleAdmin = true jika kasus user yang login adalah admin
+                        let roleAdmin = false
+                        if(!roleAdmin){
+                            alert('Halaman ini hanya dapat diakses oleh admin')
+                            next(false)
+                        }else{
+                            next()
+                            alert('Berhasil masuk!')
+                        }
+                    }else{
+                        next()
+                        alert('Berhasil masuk!')
+                    }
+                }
+            }else{
+                next()
+            }
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            router
+        })
+    </script>
+</body>
+</html>
