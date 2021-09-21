@@ -1,19 +1,23 @@
 <template>
   <!-- App.vue -->
   <v-app>
+
+    <alert/>
+    <Dialog />
+
     <v-navigation-drawer app v-model="drawer">
       <v-list>
         <v-list-item v-if="!guest">
           <v-list-item-avatar>
-            <v-img src="https://randomuser.me/api/portraits/men/70.jpg"></v-img>
+            <v-img :src="user.photo_profile ? apiDomain + user.photo_profile : 'https://randomuser.me/api/portraits/men/70.jpg'"></v-img>
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title>Rafli Surya Pratama</v-list-item-title>
+            <v-list-item-title>{{ user.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
         <div class="pa-2" v-if="guest">
-          <v-btn block color="primary" class="mb-1">
+          <v-btn block color="primary" class="mb-1" @click="login">
             <v-icon left>mdi-lock</v-icon>
             Login
           </v-btn>
@@ -37,7 +41,7 @@
       </v-list>
       <template v-slot:append v-if="!guest">
         <div class="pa-2">
-          <v-btn block color="red" dark>
+          <v-btn block color="red" dark @click="logout">
             <v-icon left>mdi-lock</v-icon>
             Logout
           </v-btn>
@@ -70,17 +74,75 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 
 export default {
   name: 'App',
-
+  components: { 
+    Alert: () => import('./components/Alert.vue'),
+    Dialog: () => import('./components/Dialog.vue'),
+  },
   data: () => ({
     drawer: false,
     menus: [
       { title: 'Home', icon: 'mdi-home', route: '/'},
       { title: 'Blogs', icon: 'mdi-note', route: '/blogs'},
     ],
-    guest: false
+    apiDomain: 'http://demo-api-vue.sanbercloud.com',
   }),
+  computed: {
+    ...mapGetters({
+      guest: 'auth/guest',
+      user: 'auth/user',
+      token: 'auth/token'
+    })
+  },
+  methods: {
+    ...mapMutations({
+      'setToken': 'auth/setToken',
+      'setUser': 'auth/setUser'
+    }),
+    logout(){
+      const config = {
+        method: 'post',
+        url: this.apiDomain + '/api/v2/auth/logout',
+        headers: {
+          'Authorization': 'Bearer ' + this.token
+        }
+      }
+
+      this.axios(config)
+       .then(() => {
+         this.setToken('')
+         this.setUser({})
+
+         this.setAlert({
+           status: true,
+           color: 'success',
+           text: 'Anda berhasil logout',
+         })
+       })
+       .catch(responses => {
+         this.setAlert({
+           status: true,
+           color: 'success',
+           text: responses.data.error,
+         })
+       })
+    },
+    login(){
+      this.setDialogComponent({'component' : 'login'})
+    },
+    ...mapActions({
+      setAlert: 'alert/set',
+      setDialogComponent: 'dialog/setComponent',
+      checkToken: 'auth/checkToken'
+    }),
+  },
+  mounted(){
+    if(this.token){
+      this.checkToken(this.token)
+    }
+  }
 };
 </script>
